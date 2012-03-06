@@ -1,0 +1,11 @@
+Catkin-ProjectName: geometry_experimental
+Version: 0.0.0
+Description:
+
+Depends: catkin, genmsg, common_msgs
+Author:
+Maintainer:
+Homepage:
+
+Catkin-DebRulesType: python_distutils
+Catkin-CopyrightType: willowgarage
