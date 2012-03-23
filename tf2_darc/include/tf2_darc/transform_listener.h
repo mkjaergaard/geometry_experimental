@@ -10,7 +10,7 @@
 namespace tf2
 {
 
-class TransformListener : darc::Subcomponent, public tf2::Buffer
+class TransformListener : public darc::Subcomponent, public tf2::Buffer
 {
 protected:
   darc::pubsub::Subscriber<tf2_msgs::TFMessage> tf_subscriber_;
@@ -21,17 +21,17 @@ protected:
 public:
   TransformListener(darc::Component * owner) :
     darc::Subcomponent(owner),
-    tf_subscriber_(this, "/tf", boost::bind( &TransformListener::tfHandler, this, _1 )),
-    tf_static_subscriber_(this, "/tf_static", boost::bind( &TransformListener::tfStaticHandler, this, _1 ))
+    tf_subscriber_(this, "/tf", &TransformListener::tfHandler),
+    tf_static_subscriber_(this, "/tf_static", &TransformListener::tfStaticHandler)
   {
   }
 
 protected:
 
   /// Callback function for ros message subscriptoin
-  void tfHandler(const tf2_msgs::TFMessageConstPtr msg);
-  void tfStaticHandler(const tf2_msgs::TFMessageConstPtr msg);
-  void tfImpl(const tf2_msgs::TFMessageConstPtr& msg, bool is_static);
+  void tfHandler(const tf2_msgs::TFMessage& msg);
+  void tfStaticHandler(const tf2_msgs::TFMessage& msg);
+  void tfImpl(const tf2_msgs::TFMessage& msg, bool is_static);
 
 };
 }

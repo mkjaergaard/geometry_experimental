@@ -3,18 +3,17 @@
 
 using namespace tf2;
 
-void TransformListener::tfHandler(const tf2_msgs::TFMessageConstPtr msg)
+void TransformListener::tfHandler(const tf2_msgs::TFMessage& msg)
 {
   tfImpl(msg, false);
 }
-void TransformListener::tfStaticHandler(const tf2_msgs::TFMessageConstPtr msg)
+void TransformListener::tfStaticHandler(const tf2_msgs::TFMessage& msg)
 {
   tfImpl(msg, true);
 }
 
-void TransformListener::tfImpl(const tf2_msgs::TFMessageConstPtr& msg, bool is_static)
+void TransformListener::tfImpl(const tf2_msgs::TFMessage& msg_in, bool is_static)
 {
-  const tf2_msgs::TFMessage& msg_in = *msg;
   for (unsigned int i = 0; i < msg_in.transforms.size(); i++)
   {
     std::string authority = "todo";
